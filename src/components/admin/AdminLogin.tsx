@@ -1,29 +1,52 @@
 import { useState } from 'react';
 import { Eye, EyeOff, Lock } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 interface AdminLoginProps {
   onLogin: () => void;
 }
 
-const ADMIN_PASSWORD = 'enjoy2024';
-
 const AdminLogin = ({ onLogin }: AdminLoginProps) => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [shaking, setShaking] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
-      sessionStorage.setItem('admin-auth', 'true');
-      onLogin();
-    } else {
-      setError('Senha incorreta. Tente novamente.');
+    setLoading(true);
+    setError('');
+
+    const { data, error: authError } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (authError || !data.user) {
+      setError('E-mail ou senha incorretos.');
       setShaking(true);
       setTimeout(() => setShaking(false), 500);
-      setPassword('');
+      setLoading(false);
+      return;
     }
+
+    // Check admin role
+    const { data: roles } = await supabase
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', data.user.id)
+      .eq('role', 'admin');
+
+    if (!roles || roles.length === 0) {
+      setError('Você não tem permissão de administrador.');
+      await supabase.auth.signOut();
+      setShaking(true);
+      setTimeout(() => setShaking(false), 500);
+      setLoading(false);
+      return;
+    }
+
+    onLogin();
+    setLoading(false);
   };
 
   return (
@@ -49,23 +72,35 @@ const AdminLogin = ({ onLogin }: AdminLoginProps) => {
 
           <h1 className="font-playfair text-2xl font-bold text-center text-foreground mb-2">Acesso Restrito</h1>
           <p className="text-sm text-muted-foreground text-center mb-8 leading-relaxed">
-            Digite a senha para acessar o painel de edição da landing page.
+            Faça login com suas credenciais de administrador.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="text-xs tracking-[1px] uppercase text-foreground/70 font-semibold mb-1.5 block">E-mail</label>
+              <input
+                type="email"
+                value={email}
+                onChange={e => { setEmail(e.target.value); setError(''); }}
+                placeholder="admin@enjoymaranhao.com.br"
+                className="w-full h-12 rounded-xl border border-border bg-background px-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors text-sm"
+                autoFocus
+              />
+            </div>
+
             <div className="relative">
+              <label className="text-xs tracking-[1px] uppercase text-foreground/70 font-semibold mb-1.5 block">Senha</label>
               <input
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={e => { setPassword(e.target.value); setError(''); }}
                 placeholder="••••••••"
                 className="w-full h-12 rounded-xl border border-border bg-background px-4 pr-12 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors text-sm"
-                autoFocus
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors p-1"
+                className="absolute right-3 bottom-3 text-muted-foreground hover:text-foreground transition-colors p-1"
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -77,9 +112,10 @@ const AdminLogin = ({ onLogin }: AdminLoginProps) => {
 
             <button
               type="submit"
-              className="w-full h-12 rounded-xl grad-bg text-white text-sm tracking-[2px] uppercase font-semibold font-dm transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5 shadow-[0_8px_30px_rgba(27,123,180,0.2)]"
+              disabled={loading}
+              className="w-full h-12 rounded-xl grad-bg text-white text-sm tracking-[2px] uppercase font-semibold font-dm transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5 shadow-[0_8px_30px_rgba(27,123,180,0.2)] disabled:opacity-60"
             >
-              Entrar
+              {loading ? 'Entrando...' : 'Entrar'}
             </button>
           </form>
         </div>

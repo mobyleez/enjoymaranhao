@@ -6,9 +6,11 @@ import { format } from 'date-fns';
 import { CalendarIcon, Send, CheckCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useSiteContent } from '@/contexts/SiteContentContext';
+import { supabase } from '@/integrations/supabase/client';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { toast } from '@/hooks/use-toast';
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, 'Nome deve ter pelo menos 2 caracteres').max(100, 'Nome muito longo'),
@@ -30,13 +32,30 @@ const CTASection = () => {
     defaultValues: { name: '', email: '', phone: '', message: '' },
   });
 
-  const onSubmit = (_data: ContactFormData) => {
-    // In production, send to an API endpoint
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      form.reset();
-    }, 4000);
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      const { error } = await supabase.from('contact_leads').insert({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        travel_date: format(data.travelDate, 'yyyy-MM-dd'),
+        message: data.message,
+      });
+
+      if (error) throw error;
+
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        form.reset();
+      }, 4000);
+    } catch {
+      toast({
+        title: 'Erro ao enviar',
+        description: 'Não foi possível enviar sua mensagem. Tente novamente.',
+        variant: 'destructive',
+      });
+    }
   };
 
   return (
@@ -49,7 +68,6 @@ const CTASection = () => {
       <div className="relative z-[1] max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         {/* Left: CTA text */}
         <div className="text-center lg:text-left">
-          {/* Logo */}
           <div className="mx-auto lg:mx-0 mb-8 lg:mb-10 w-[200px] lg:w-[240px]">
             <svg viewBox="0 0 240 60" xmlns="http://www.w3.org/2000/svg">
               <defs>
