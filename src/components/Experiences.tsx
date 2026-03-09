@@ -1,13 +1,9 @@
-const experiences = [
-  { icon: '🏜️', num: '01', title: 'Trekking nas Dunas', desc: 'Percorra a pé as dunas brancas dos Lençóis Maranhenses ao pôr do sol. Um espetáculo que muda para sempre a sua percepção de beleza natural.' },
-  { icon: '🥁', num: '02', title: 'Bumba Meu Boi', desc: 'Mergulhe no maior festival folclórico do Brasil. Cores, ritmos e histórias que revelam a alma mais profunda do povo maranhense.' },
-  { icon: '🍽️', num: '03', title: 'Gastronomia Local', desc: 'Do arroz de cuxá ao torresmo de tambaqui, a culinária maranhense é um patrimônio vivo. Prove sabores que só existem aqui.' },
-  { icon: '🛶', num: '04', title: 'Passeio de Lancha', desc: 'Navegue pelo rio Preguiças entre manguezais, restingas e comunidades quilombolas. Uma jornada ao coração mais genuíno do Maranhão.' },
-  { icon: '🏛️', num: '05', title: 'Centro Histórico', desc: 'Caminhe pelos azulejos portugueses de São Luís, Patrimônio da Humanidade pela UNESCO. Arquitetura colonial que respira história em cada esquina.' },
-  { icon: '🌅', num: '06', title: 'Pôr do Sol na Lagoa', desc: 'As lagoas dos Lençóis refletem o céu em cores impossíveis no entardecer. O momento mais fotográfico do Maranhão é também o mais contemplativo.' },
-];
+import { useSiteContent } from '@/contexts/SiteContentContext';
 
 const Experiences = () => {
+  const { content } = useSiteContent();
+  const experiences = content.experiences;
+
   return (
     <section className="bg-secondary py-16 lg:py-[120px] px-5 lg:px-16 relative" id="experiencias">
       <div className="flex flex-col lg:flex-row justify-between lg:items-end mb-10 lg:mb-16 gap-4 reveal">

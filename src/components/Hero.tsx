@@ -1,4 +1,9 @@
+import { useSiteContent } from '@/contexts/SiteContentContext';
+
 const Hero = () => {
+  const { content } = useSiteContent();
+  const { hero } = content;
+
   return (
     <section className="min-h-screen flex flex-col justify-end px-5 lg:px-16 pb-10 lg:pb-20 relative overflow-hidden">
       {/* Background */}
@@ -48,23 +53,23 @@ const Hero = () => {
 
       {/* Tag */}
       <p className="animate-fade-up-1 text-[10px] lg:text-[11px] tracking-[4px] lg:tracking-[5px] uppercase font-semibold grad-text relative z-10 mb-4 lg:mb-5">
-        TURISMO · MARANHÃO · BRASIL
+        {hero.tag}
       </p>
 
       {/* Title */}
       <h1 className="animate-fade-up-2 font-playfair font-black leading-[0.95] lg:leading-[0.92] tracking-[-2px] lg:tracking-[-3px] max-w-full lg:max-w-[60%] mb-6 lg:mb-8 relative z-10" style={{ fontSize: 'clamp(32px, 8vw, 110px)' }}>
-        O Brasil que poucos conhecem. Todos <em className="italic grad-text-diag">deveriam.</em>
+        {hero.title.split(' ').slice(0, -1).join(' ')} <em className="italic grad-text-diag">{hero.title.split(' ').at(-1)}</em>
       </h1>
 
       {/* Bottom section */}
       <div className="animate-fade-up-3 flex flex-col lg:flex-row items-start lg:items-end justify-between relative z-10 gap-6 lg:gap-8">
         <p className="text-sm lg:text-[15px] text-[rgba(255,255,255,0.45)] max-w-[380px] leading-[1.7] lg:leading-[1.8] font-light">
-          Das dunas brancas dos Lençóis ao ritmo do Bumba Meu Boi — descubra o Maranhão com quem verdadeiramente o ama.
+          {hero.subtitle}
         </p>
 
         <div className="flex flex-col items-start lg:items-end gap-4 w-full lg:w-auto">
           <a href="#destinos" className="inline-flex items-center justify-center gap-3 py-4 lg:py-[18px] px-8 lg:px-10 rounded-full grad-bg text-white text-xs lg:text-[13px] tracking-[2px] uppercase font-semibold no-underline font-dm relative overflow-hidden transition-all duration-300 hover:-translate-y-[3px] shadow-[0_8px_40px_rgba(27,123,180,0.25)] hover:shadow-[0_16px_60px_rgba(27,123,180,0.4)] w-full sm:w-auto min-h-[52px]">
-            EXPLORAR DESTINOS
+            {hero.ctaText}
             <span className="w-5 h-5 rounded-full bg-[rgba(255,255,255,0.2)] flex items-center justify-center text-[10px]">→</span>
           </a>
 

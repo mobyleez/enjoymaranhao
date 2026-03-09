@@ -1,58 +1,9 @@
-const packages = [
-  {
-    type: 'light' as const,
-    name: 'Fim de Semana\nnos Lençóis',
-    subtitle: '2 dias de imersão nas dunas brancas com tudo incluído.',
-    priceLabel: 'A partir de',
-    price: 'R$ 890',
-    priceSuffix: '/pax',
-    items: [
-      { color: '#1B7BB4', text: 'Transfer aeroporto incluído' },
-      { color: '#7AC4E2', text: 'Pousada 3 estrelas' },
-      { color: '#F5A623', text: 'Passeio nas dunas ao pôr do sol' },
-      { color: '#1A7875', text: 'Guia especializado' },
-    ],
-    btnText: 'Saiba mais',
-    btnStyle: 'outline' as const,
-  },
-  {
-    type: 'featured' as const,
-    badge: '✦ Mais popular',
-    name: 'Maranhão\nCompleto',
-    subtitle: '7 dias explorando os principais destinos do estado com experiências exclusivas.',
-    priceLabel: 'A partir de',
-    price: 'R$ 3.490',
-    priceSuffix: '/pax',
-    items: [
-      { color: '#F5A623', text: 'São Luís + Lençóis + Chapada' },
-      { color: '#7AC4E2', text: 'Passeio de lancha no Rio Preguiças' },
-      { color: '#E85C4A', text: 'Jantares típicos incluídos' },
-      { color: '#1A7875', text: 'Pousadas selecionadas' },
-      { color: '#6B1E4E', text: 'Guia exclusivo em todo o roteiro' },
-    ],
-    btnText: 'Reservar agora',
-    btnStyle: 'grad' as const,
-  },
-  {
-    type: 'light' as const,
-    name: 'Roteiro\nPersonalizado',
-    subtitle: 'Criamos o roteiro ideal para você, do seu jeito, no seu ritmo.',
-    priceLabel: 'Consulte',
-    price: 'valores',
-    priceSmall: true,
-    priceSuffix: '',
-    items: [
-      { color: '#6B1E4E', text: 'Consultoria de viagem gratuita' },
-      { color: '#E85C4A', text: 'Roteiro 100% personalizado' },
-      { color: '#1A7875', text: 'Para grupos, famílias ou casais' },
-      { color: '#1B7BB4', text: 'Suporte 24h durante a viagem' },
-    ],
-    btnText: 'Falar com especialista',
-    btnStyle: 'outline' as const,
-  },
-];
+import { useSiteContent } from '@/contexts/SiteContentContext';
 
 const Packages = () => {
+  const { content } = useSiteContent();
+  const packages = content.packages;
+
   return (
     <section className="bg-secondary py-16 lg:py-[120px] px-5 lg:px-16 relative" id="pacotes">
       <div className="flex flex-col lg:flex-row justify-between lg:items-end mb-10 lg:mb-16 gap-4 reveal">
