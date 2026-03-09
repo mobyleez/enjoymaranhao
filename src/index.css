@@ -61,12 +61,19 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
     font-family: 'DM Sans', sans-serif;
     @apply bg-background text-foreground overflow-x-hidden;
-    cursor: none;
+  }
+
+  /* Hide custom cursor on touch devices */
+  @media (hover: hover) and (pointer: fine) {
+    body {
+      cursor: none;
+    }
   }
 }
 
