@@ -1,11 +1,9 @@
-const stats = [
-  { num: '500', suffix: '+', label: 'Viajantes Atendidos' },
-  { num: '12', suffix: '', label: 'Destinos Exclusivos' },
-  { num: '98', suffix: '%', label: 'Satisfação' },
-  { num: '5', suffix: '★', label: 'Avaliação Média' },
-];
+import { useSiteContent } from '@/contexts/SiteContentContext';
 
 const Stats = () => {
+  const { content } = useSiteContent();
+  const stats = content.stats;
+
   return (
     <section className="bg-secondary py-12 lg:py-20 px-5 lg:px-16 relative overflow-hidden">
       <div className="absolute inset-0" style={{
