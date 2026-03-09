@@ -5,7 +5,7 @@ const Hero = () => {
   const { hero } = content;
 
   return (
-    <section className="min-h-screen flex flex-col justify-end px-5 lg:px-16 pb-10 lg:pb-20 relative overflow-hidden">
+    <section className="min-h-screen flex flex-col justify-center px-5 lg:px-16 pt-20 lg:pt-24 pb-10 lg:pb-16 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-background" style={{
         backgroundImage: 'radial-gradient(circle at 15% 85%, rgba(26,120,117,0.18) 0%, transparent 40%), radial-gradient(circle at 85% 20%, rgba(27,123,180,0.15) 0%, transparent 40%), radial-gradient(circle at 50% 50%, rgba(107,30,78,0.08) 0%, transparent 50%)'
@@ -26,8 +26,8 @@ const Hero = () => {
       </div>
 
       {/* Floating symbol - hidden on mobile */}
-      <div className="absolute right-[15%] top-1/2 animate-float pointer-events-none hidden lg:block" style={{
-        width: 'clamp(200px, 22vw, 340px)',
+      <div className="absolute right-[10%] top-[35%] -translate-y-1/2 animate-float pointer-events-none hidden lg:block" style={{
+        width: 'clamp(180px, 18vw, 280px)',
         filter: 'drop-shadow(0 0 80px rgba(27,123,180,0.15))'
       }}>
         <svg viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
@@ -48,35 +48,38 @@ const Hero = () => {
         </svg>
       </div>
 
-      {/* Gradient line */}
-      <div className="absolute left-0 right-0 h-[2px] grad-bg opacity-60 top-1/2 animate-line-reveal hidden md:block" />
+      {/* Gradient line - moved to bottom area */}
+      <div className="absolute left-0 right-0 h-[2px] grad-bg opacity-40 bottom-[120px] animate-line-reveal hidden md:block" />
 
-      {/* Tag */}
-      <p className="animate-fade-up-1 text-[10px] lg:text-[11px] tracking-[4px] lg:tracking-[5px] uppercase font-semibold grad-text relative z-10 mb-4 lg:mb-5">
-        {hero.tag}
-      </p>
-
-      {/* Title */}
-      <h1 className="animate-fade-up-2 font-playfair font-black leading-[0.95] lg:leading-[0.92] tracking-[-2px] lg:tracking-[-3px] max-w-full lg:max-w-[60%] mb-6 lg:mb-8 relative z-10" style={{ fontSize: 'clamp(32px, 8vw, 110px)' }}>
-        {hero.title.split(' ').slice(0, -1).join(' ')} <em className="italic grad-text-diag">{hero.title.split(' ').at(-1)}</em>
-      </h1>
-
-      {/* Bottom section */}
-      <div className="animate-fade-up-3 flex flex-col lg:flex-row items-start lg:items-end justify-between relative z-10 gap-6 lg:gap-8">
-        <p className="text-sm lg:text-[15px] text-[rgba(255,255,255,0.45)] max-w-[380px] leading-[1.7] lg:leading-[1.8] font-light">
-          {hero.subtitle}
+      {/* Content */}
+      <div className="relative z-10 flex flex-col gap-8 lg:gap-10">
+        {/* Tag */}
+        <p className="animate-fade-up-1 text-[10px] lg:text-[11px] tracking-[4px] lg:tracking-[5px] uppercase font-semibold grad-text">
+          {hero.tag}
         </p>
 
-        <div className="flex flex-col items-start lg:items-end gap-4 w-full lg:w-auto">
-          <a href="#destinos" className="inline-flex items-center justify-center gap-3 py-4 lg:py-[18px] px-8 lg:px-10 rounded-full grad-bg text-white text-xs lg:text-[13px] tracking-[2px] uppercase font-semibold no-underline font-dm relative overflow-hidden transition-all duration-300 hover:-translate-y-[3px] shadow-[0_8px_40px_rgba(27,123,180,0.25)] hover:shadow-[0_16px_60px_rgba(27,123,180,0.4)] w-full sm:w-auto min-h-[52px]">
-            {hero.ctaText}
-            <span className="w-5 h-5 rounded-full bg-[rgba(255,255,255,0.2)] flex items-center justify-center text-[10px]">→</span>
-          </a>
+        {/* Title */}
+        <h1 className="animate-fade-up-2 font-playfair font-black leading-[0.95] lg:leading-[0.92] tracking-[-2px] lg:tracking-[-3px] max-w-full lg:max-w-[55%]" style={{ fontSize: 'clamp(32px, 7vw, 100px)' }}>
+          {hero.title.split(' ').slice(0, -1).join(' ')} <em className="italic grad-text-diag">{hero.title.split(' ').at(-1)}</em>
+        </h1>
 
-          <div className="flex items-center gap-2 text-[10px] tracking-[3px] uppercase text-[rgba(255,255,255,0.25)]">
-            <span className="w-10 h-[1px] grad-bg inline-block animate-scroll-pulse" />
-            <span className="hidden sm:inline">ROLE PARA DESCOBRIR</span>
-            <span className="sm:hidden">DESLIZE PARA DESCOBRIR</span>
+        {/* Bottom section */}
+        <div className="animate-fade-up-3 flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 lg:gap-8">
+          <p className="text-sm lg:text-[15px] text-[rgba(255,255,255,0.45)] max-w-[380px] leading-[1.7] lg:leading-[1.8] font-light">
+            {hero.subtitle}
+          </p>
+
+          <div className="flex flex-col items-start lg:items-end gap-4 w-full lg:w-auto">
+            <a href="#destinos" className="inline-flex items-center justify-center gap-3 py-4 lg:py-[18px] px-8 lg:px-10 rounded-full grad-bg text-white text-xs lg:text-[13px] tracking-[2px] uppercase font-semibold no-underline font-dm relative overflow-hidden transition-all duration-300 hover:-translate-y-[3px] shadow-[0_8px_40px_rgba(27,123,180,0.25)] hover:shadow-[0_16px_60px_rgba(27,123,180,0.4)] w-full sm:w-auto min-h-[52px]">
+              {hero.ctaText}
+              <span className="w-5 h-5 rounded-full bg-[rgba(255,255,255,0.2)] flex items-center justify-center text-[10px]">→</span>
+            </a>
+
+            <div className="flex items-center gap-2 text-[10px] tracking-[3px] uppercase text-[rgba(255,255,255,0.25)]">
+              <span className="w-10 h-[1px] grad-bg inline-block animate-scroll-pulse" />
+              <span className="hidden sm:inline">ROLE PARA DESCOBRIR</span>
+              <span className="sm:hidden">DESLIZE PARA DESCOBRIR</span>
+            </div>
           </div>
         </div>
       </div>
