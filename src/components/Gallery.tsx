@@ -111,34 +111,38 @@ const Gallery = () => {
   const onMouseUp = () => setIsDragging(false);
 
   return (
-    <section className="bg-background pb-20 lg:pb-[120px] overflow-hidden">
-      <div className="px-8 lg:px-16 pt-[60px] flex flex-col lg:flex-row justify-between lg:items-end gap-4 mb-0">
+    <section className="bg-background pb-16 lg:pb-[120px] overflow-hidden">
+      <div className="px-5 lg:px-16 pt-10 lg:pt-[60px] flex flex-col lg:flex-row justify-between lg:items-end gap-3 lg:gap-4 mb-0">
         <div>
-          <p className="text-[10px] tracking-[5px] uppercase font-semibold grad-text flex items-center gap-2.5 mb-3">
+          <p className="text-[10px] tracking-[4px] lg:tracking-[5px] uppercase font-semibold grad-text flex items-center gap-2.5 mb-3">
             <span className="inline-block w-8 h-[3px] grad-bg rounded-sm flex-shrink-0" />
             Galeria
           </p>
-          <h2 className="font-playfair font-bold leading-[1.05] tracking-[-2px]" style={{ fontSize: 'clamp(32px, 4vw, 54px)' }}>
+          <h2 className="font-playfair font-bold leading-[1.05] tracking-[-1px] lg:tracking-[-2px]" style={{ fontSize: 'clamp(28px, 4vw, 54px)' }}>
             Instantes <em className="italic grad-text-diag">reais.</em>
           </h2>
         </div>
-        <p className="text-xs text-[rgba(255,255,255,0.3)] tracking-[1px]">← Arraste para explorar →</p>
+        <p className="text-xs text-[rgba(255,255,255,0.3)] tracking-[1px]">
+          <span className="hidden lg:inline">← Arraste para explorar →</span>
+          <span className="lg:hidden">← Deslize para explorar →</span>
+        </p>
       </div>
 
       <div
         ref={scrollRef}
-        className={`gallery-scroll flex gap-4 px-8 lg:px-16 py-[60px] overflow-x-auto ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+        className={`gallery-scroll flex gap-3 lg:gap-4 px-5 lg:px-16 py-8 lg:py-[60px] overflow-x-auto snap-x snap-mandatory lg:snap-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+        style={{ WebkitOverflowScrolling: 'touch' }}
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
         onMouseLeave={onMouseUp}
       >
         {items.map((item, i) => (
-          <div key={i} className="flex-shrink-0 w-[300px] h-[400px] rounded-2xl overflow-hidden relative transition-transform duration-300 hover:scale-[1.02]">
+          <div key={i} className="flex-shrink-0 w-[260px] sm:w-[280px] lg:w-[300px] h-[340px] sm:h-[360px] lg:h-[400px] rounded-2xl overflow-hidden relative transition-transform duration-300 hover:scale-[1.02] snap-start">
             <div className="absolute inset-0" style={{ background: item.bg }}>
               {item.svg}
             </div>
-            <p className="absolute bottom-5 left-5 font-playfair text-lg text-white font-bold drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+            <p className="absolute bottom-4 lg:bottom-5 left-4 lg:left-5 font-playfair text-base lg:text-lg text-white font-bold drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
               {item.label}
             </p>
             <div className="absolute bottom-0 left-0 right-0 h-[3px] grad-bg" />
