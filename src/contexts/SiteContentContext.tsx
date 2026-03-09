@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 
 export interface StatItem {
   num: string;
@@ -69,7 +70,7 @@ export interface SiteContent {
   };
 }
 
-const defaultContent: SiteContent = {
+export const defaultContent: SiteContent = {
   hero: {
     tag: 'TURISMO · MARANHÃO · BRASIL',
     title: 'O Brasil que poucos conhecem. Todos deveriam.',
@@ -175,29 +176,36 @@ interface SiteContentContextType {
   updateContent: (newContent: SiteContent) => void;
   updateSection: <K extends keyof SiteContent>(section: K, value: SiteContent[K]) => void;
   resetToDefaults: () => void;
+  saveToSupabase: () => Promise<void>;
   defaults: SiteContent;
 }
 
 const SiteContentContext = createContext<SiteContentContextType | null>(null);
 
-const STORAGE_KEY = 'enjoy-maranhao-content';
-
 export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [content, setContent] = useState<SiteContent>(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        // Deep merge to handle new fields added to defaults
-        return deepMerge(defaultContent, parsed);
-      }
-    } catch {}
-    return defaultContent;
-  });
+  const [content, setContent] = useState<SiteContent>(defaultContent);
+  const [loaded, setLoaded] = useState(false);
 
+  // Load content from Supabase on mount
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
-  }, [content]);
+    const loadContent = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('site_content')
+          .select('content')
+          .limit(1)
+          .maybeSingle();
+
+        if (!error && data?.content) {
+          setContent(deepMerge(defaultContent, data.content as Partial<SiteContent>));
+        }
+      } catch {
+        // Fall back to defaults silently
+      }
+      setLoaded(true);
+    };
+    loadContent();
+  }, []);
 
   const updateContent = (newContent: SiteContent) => {
     setContent(newContent);
@@ -208,13 +216,38 @@ export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({ c
   };
 
   const resetToDefaults = () => {
-    localStorage.removeItem(STORAGE_KEY);
     setContent(defaultContent);
   };
 
+  const saveToSupabase = async () => {
+    // Upsert: check if row exists, update or insert
+    const { data: existing } = await supabase
+      .from('site_content')
+      .select('id')
+      .limit(1)
+      .maybeSingle();
+
+    if (existing) {
+      const { error } = await supabase
+        .from('site_content')
+        .update({ content: content as unknown as Record<string, unknown>, updated_at: new Date().toISOString() })
+        .eq('id', existing.id);
+      if (error) throw error;
+    } else {
+      const { error } = await supabase
+        .from('site_content')
+        .insert({ content: content as unknown as Record<string, unknown> });
+      if (error) throw error;
+    }
+  };
+
   return (
-    <SiteContentContext.Provider value={{ content, updateContent, updateSection, resetToDefaults, defaults: defaultContent }}>
-      {children}
+    <SiteContentContext.Provider value={{ content, updateContent, updateSection, resetToDefaults, saveToSupabase, defaults: defaultContent }}>
+      {loaded ? children : (
+        <div className="min-h-screen bg-background flex items-center justify-center">
+          <div className="text-muted-foreground text-sm">Carregando...</div>
+        </div>
+      )}
     </SiteContentContext.Provider>
   );
 };

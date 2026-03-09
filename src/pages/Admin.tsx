@@ -12,6 +12,7 @@ import FooterEditor from '@/components/admin/sections/FooterEditor';
 import { useSiteContent } from '@/contexts/SiteContentContext';
 import { toast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
+import { supabase } from '@/integrations/supabase/client';
 
 const sections = [
   { id: 'hero', label: 'Hero', icon: Image, desc: 'Título e CTA principal' },
@@ -36,32 +37,64 @@ const sectionComponents: Record<string, React.ReactNode> = {
 };
 
 const AdminPage = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return sessionStorage.getItem('admin-auth') === 'true';
-  });
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(true);
   const [activeSection, setActiveSection] = useState('hero');
   const [isSaving, setIsSaving] = useState(false);
-  const { resetToDefaults } = useSiteContent();
+  const { content, resetToDefaults, saveToSupabase } = useSiteContent();
 
   useEffect(() => {
     document.title = 'Admin — Enjoy Maranhão';
+
+    // Check if already logged in with admin role
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        const { data: roles } = await supabase
+          .from('user_roles')
+          .select('role')
+          .eq('user_id', session.user.id)
+          .eq('role', 'admin');
+        if (roles && roles.length > 0) {
+          setIsAuthenticated(true);
+        }
+      }
+      setCheckingAuth(false);
+    };
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session) {
+        setIsAuthenticated(false);
+      }
+    });
+
+    checkSession();
+    return () => subscription.unsubscribe();
   }, []);
 
   const handleLogin = () => setIsAuthenticated(true);
 
-  const handleLogout = () => {
-    sessionStorage.removeItem('admin-auth');
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     setIsAuthenticated(false);
   };
 
   const handleSave = async () => {
     setIsSaving(true);
-    await new Promise(r => setTimeout(r, 600));
+    try {
+      await saveToSupabase();
+      toast({
+        title: 'Alterações salvas!',
+        description: 'As mudanças já estão visíveis na landing page.',
+      });
+    } catch {
+      toast({
+        title: 'Erro ao salvar',
+        description: 'Não foi possível salvar as alterações. Tente novamente.',
+        variant: 'destructive',
+      });
+    }
     setIsSaving(false);
-    toast({
-      title: 'Alterações salvas!',
-      description: 'As mudanças já estão visíveis na landing page.',
-    });
   };
 
   const handleReset = () => {
@@ -73,6 +106,14 @@ const AdminPage = () => {
       });
     }
   };
+
+  if (checkingAuth) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-muted-foreground text-sm">Verificando autenticação...</div>
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return <AdminLogin onLogin={handleLogin} />;
