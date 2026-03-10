@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ExternalLink, RotateCcw, Save, LayoutDashboard, Image, BarChart3, MapPin, Sparkles, BookOpen, Package, Megaphone, Footprints, LogOut } from 'lucide-react';
+import { ExternalLink, RotateCcw, Save, LayoutDashboard, Image, BarChart3, MapPin, Sparkles, BookOpen, Package, Megaphone, Footprints, LogOut, Images } from 'lucide-react';
 import AdminLogin from '@/components/admin/AdminLogin';
 import HeroEditor from '@/components/admin/sections/HeroEditor';
 import StatsEditor from '@/components/admin/sections/StatsEditor';
@@ -9,6 +9,7 @@ import ManifestoEditor from '@/components/admin/sections/ManifestoEditor';
 import PackagesEditor from '@/components/admin/sections/PackagesEditor';
 import CTAEditor from '@/components/admin/sections/CTAEditor';
 import FooterEditor from '@/components/admin/sections/FooterEditor';
+import GalleryEditor from '@/components/admin/sections/GalleryEditor';
 import { useSiteContent } from '@/contexts/SiteContentContext';
 import { toast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
@@ -18,6 +19,7 @@ const sections = [
   { id: 'hero', label: 'Hero', icon: Image, desc: 'Título e CTA principal' },
   { id: 'stats', label: 'Estatísticas', icon: BarChart3, desc: '4 números de destaque' },
   { id: 'destinations', label: 'Destinos', icon: MapPin, desc: '5 cards de destinos' },
+  { id: 'gallery', label: 'Galeria', icon: Images, desc: '6 imagens do carrossel' },
   { id: 'experiences', label: 'Experiências', icon: Sparkles, desc: '6 cards de experiências' },
   { id: 'manifesto', label: 'Manifesto', icon: BookOpen, desc: 'Citação em destaque' },
   { id: 'packages', label: 'Pacotes', icon: Package, desc: '3 pacotes de viagem' },
@@ -29,6 +31,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
   hero: <HeroEditor />,
   stats: <StatsEditor />,
   destinations: <DestinationsEditor />,
+  gallery: <GalleryEditor />,
   experiences: <ExperiencesEditor />,
   manifesto: <ManifestoEditor />,
   packages: <PackagesEditor />,
