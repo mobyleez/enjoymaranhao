@@ -17,6 +17,21 @@ const HeroEditor = () => {
       </div>
 
       <div className="space-y-5">
+        <AdminField label="Imagem de Fundo" hint="URL da imagem (Unsplash ou link direto)">
+          <input
+            type="text"
+            value={hero.bgImage}
+            onChange={e => update('bgImage', e.target.value)}
+            placeholder="https://images.unsplash.com/..."
+            className="admin-input"
+          />
+          {hero.bgImage && (
+            <div className="mt-2 rounded-lg overflow-hidden border border-border h-32">
+              <img src={hero.bgImage} alt="Preview" className="w-full h-full object-cover" />
+            </div>
+          )}
+        </AdminField>
+
         <AdminField label="Tag Line" hint="Texto pequeno acima do título">
           <input
             type="text"

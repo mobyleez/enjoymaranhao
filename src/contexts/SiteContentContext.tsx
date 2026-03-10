@@ -11,6 +11,7 @@ export interface DestinationItem {
   name: string;
   tag: string;
   sub: string;
+  image: string;
 }
 
 export interface ExperienceItem {
@@ -39,12 +40,18 @@ export interface PackageData {
   btnStyle: 'outline' | 'grad';
 }
 
+export interface GalleryItem {
+  label: string;
+  image: string;
+}
+
 export interface SiteContent {
   hero: {
     tag: string;
     title: string;
     subtitle: string;
     ctaText: string;
+    bgImage: string;
   };
   stats: StatItem[];
   destinations: DestinationItem[];
@@ -54,6 +61,7 @@ export interface SiteContent {
     authorLine: string;
   };
   packages: PackageData[];
+  gallery: GalleryItem[];
   cta: {
     title: string;
     description: string;
@@ -76,6 +84,7 @@ export const defaultContent: SiteContent = {
     title: 'O Brasil que poucos conhecem. Todos deveriam.',
     subtitle: 'Das dunas brancas dos Lençóis ao ritmo do Bumba Meu Boi — descubra o Maranhão com quem verdadeiramente o ama.',
     ctaText: 'EXPLORAR DESTINOS',
+    bgImage: 'https://images.unsplash.com/photo-1626010429613-0d52dcb7a14a?w=1920&q=80',
   },
   stats: [
     { num: '500', suffix: '+', label: 'Viajantes Atendidos' },
@@ -84,11 +93,11 @@ export const defaultContent: SiteContent = {
     { num: '5', suffix: '★', label: 'Avaliação Média' },
   ],
   destinations: [
-    { name: 'Lençóis Maranhenses', tag: 'Imperdível', sub: 'Dunas brancas e lagoas cristalinas' },
-    { name: 'São Luís', tag: 'Patrimônio UNESCO', sub: 'A ilha capital com azulejos e história' },
-    { name: 'Chapada das Mesas', tag: 'Natureza', sub: 'Cachoeiras e formações rochosas deslumbrantes' },
-    { name: 'Barreirinhas', tag: 'Ecoturismo', sub: 'Portal dos Lençóis Maranhenses' },
-    { name: 'Delta do Parnaíba', tag: 'Aventura', sub: 'Encontro do rio com o mar' },
+    { name: 'Lençóis Maranhenses', tag: 'Imperdível', sub: 'Dunas brancas e lagoas cristalinas', image: 'https://images.unsplash.com/photo-1626010429613-0d52dcb7a14a?w=800&q=80' },
+    { name: 'São Luís', tag: 'Patrimônio UNESCO', sub: 'A ilha capital com azulejos e história', image: 'https://images.unsplash.com/photo-1590486145985-f1e3cb94a4e4?w=600&q=80' },
+    { name: 'Chapada das Mesas', tag: 'Natureza', sub: 'Cachoeiras e formações rochosas deslumbrantes', image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600&q=80' },
+    { name: 'Barreirinhas', tag: 'Ecoturismo', sub: 'Portal dos Lençóis Maranhenses', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80' },
+    { name: 'Delta do Parnaíba', tag: 'Aventura', sub: 'Encontro do rio com o mar', image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80' },
   ],
   experiences: [
     { icon: '🏜️', num: '01', title: 'Trekking nas Dunas', desc: 'Percorra a pé as dunas brancas dos Lençóis Maranhenses ao pôr do sol. Um espetáculo que muda para sempre a sua percepção de beleza natural.' },
@@ -155,6 +164,14 @@ export const defaultContent: SiteContent = {
       btnStyle: 'outline',
     },
   ],
+  gallery: [
+    { label: 'Lençóis ao amanhecer', image: 'https://images.unsplash.com/photo-1626010429613-0d52dcb7a14a?w=600&q=80' },
+    { label: 'Bumba Meu Boi', image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80' },
+    { label: 'Manguezal do Golfão', image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80' },
+    { label: 'Gastronomia maranhense', image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80' },
+    { label: 'São Luís noturna', image: 'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=600&q=80' },
+    { label: 'Delta do Parnaíba', image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80' },
+  ],
   cta: {
     title: 'Sua próxima aventura começa aqui.',
     description: 'Deixe-nos criar a viagem perfeita para você. O Maranhão espera — e nós estamos prontos para guiá-lo.',
@@ -186,7 +203,6 @@ export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [content, setContent] = useState<SiteContent>(defaultContent);
   const [loaded, setLoaded] = useState(false);
 
-  // Load content from Supabase on mount
   useEffect(() => {
     const loadContent = async () => {
       try {
@@ -207,20 +223,15 @@ export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({ c
     loadContent();
   }, []);
 
-  const updateContent = (newContent: SiteContent) => {
-    setContent(newContent);
-  };
+  const updateContent = (newContent: SiteContent) => setContent(newContent);
 
   const updateSection = <K extends keyof SiteContent>(section: K, value: SiteContent[K]) => {
     setContent(prev => ({ ...prev, [section]: value }));
   };
 
-  const resetToDefaults = () => {
-    setContent(defaultContent);
-  };
+  const resetToDefaults = () => setContent(defaultContent);
 
   const saveToSupabase = async () => {
-    // Upsert: check if row exists, update or insert
     const { data: existing } = await supabase
       .from('site_content')
       .select('id')

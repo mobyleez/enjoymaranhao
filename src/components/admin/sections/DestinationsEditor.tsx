@@ -5,7 +5,7 @@ const DestinationsEditor = () => {
   const { content, updateSection } = useSiteContent();
   const destinations = content.destinations;
 
-  const update = (index: number, field: 'name' | 'tag' | 'sub', value: string) => {
+  const update = (index: number, field: 'name' | 'tag' | 'sub' | 'image', value: string) => {
     const updated = destinations.map((d, i) => i === index ? { ...d, [field]: value } : d);
     updateSection('destinations', updated);
   };
@@ -23,6 +23,22 @@ const DestinationsEditor = () => {
             <p className="text-xs tracking-[2px] uppercase font-semibold grad-text">
               {i === 0 ? '★ Destaque (card grande)' : `Destino ${i + 1}`}
             </p>
+
+            <AdminField label="Imagem de Fundo" hint="URL da imagem">
+              <input
+                type="text"
+                value={dest.image}
+                onChange={e => update(i, 'image', e.target.value)}
+                placeholder="https://images.unsplash.com/..."
+                className="admin-input"
+              />
+              {dest.image && (
+                <div className="mt-2 rounded-lg overflow-hidden border border-border h-24">
+                  <img src={dest.image} alt="Preview" className="w-full h-full object-cover" />
+                </div>
+              )}
+            </AdminField>
+
             <AdminField label="Nome do Destino">
               <input
                 type="text"
