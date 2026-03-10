@@ -71,3 +71,39 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+
+## Painel Admin (CMS da Landing Page)
+
+Este projeto já possui uma área de administração em `/admin` para editar o conteúdo da Landing Page (hero, estatísticas, destinos, galeria, experiências, manifesto, pacotes, CTA e rodapé).
+
+### Como habilitar no Supabase
+
+1. Crie um usuário no **Authentication > Users**.
+2. Garanta as tabelas abaixo no banco:
+   - `site_content` (coluna `content` em JSONB para armazenar o conteúdo editável)
+   - `user_roles` (colunas `user_id` e `role`)
+3. Atribua `admin` para o usuário no `user_roles`.
+
+Exemplo de SQL:
+
+```sql
+create table if not exists public.site_content (
+  id uuid primary key default gen_random_uuid(),
+  content jsonb not null,
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists public.user_roles (
+  id bigint generated always as identity primary key,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  role text not null,
+  created_at timestamptz not null default now(),
+  unique (user_id, role)
+);
+
+insert into public.user_roles (user_id, role)
+values ('SEU_USER_ID_AQUI', 'admin')
+on conflict (user_id, role) do nothing;
+```
+
+Depois disso, acesse `/admin`, faça login com o usuário admin e clique em **Salvar** para publicar alterações na Landing Page.

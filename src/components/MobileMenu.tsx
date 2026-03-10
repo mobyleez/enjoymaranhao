@@ -67,6 +67,13 @@ const MobileMenu = () => {
           {/* CTA Button */}
           <div className="p-6 border-t border-[rgba(255,255,255,0.06)]">
             <a
+              href="/admin"
+              onClick={handleLinkClick}
+              className="flex items-center justify-center w-full h-12 mb-3 rounded-full border border-[rgba(255,255,255,0.2)] text-[rgba(255,255,255,0.75)] text-xs tracking-[2px] uppercase font-semibold no-underline font-dm transition-all duration-300 hover:text-white hover:border-[rgba(255,255,255,0.4)]"
+            >
+              Área Admin
+            </a>
+            <a
               href="#contato"
               onClick={handleLinkClick}
               className="flex items-center justify-center w-full h-14 rounded-full grad-bg text-white text-sm tracking-[2px] uppercase font-semibold no-underline font-dm transition-all duration-300 hover:shadow-[0_8px_30px_rgba(27,123,180,0.3)]"
