@@ -1,5 +1,6 @@
 import { useSiteContent } from '@/contexts/SiteContentContext';
 import AdminField from '../AdminField';
+import ImageUpload from '../ImageUpload';
 
 const HeroEditor = () => {
   const { content, updateSection } = useSiteContent();
@@ -17,55 +18,24 @@ const HeroEditor = () => {
       </div>
 
       <div className="space-y-5">
-        <AdminField label="Imagem de Fundo" hint="URL da imagem (Unsplash ou link direto)">
-          <input
-            type="text"
-            value={hero.bgImage}
-            onChange={e => update('bgImage', e.target.value)}
-            placeholder="https://images.unsplash.com/..."
-            className="admin-input"
-          />
-          {hero.bgImage && (
-            <div className="mt-2 rounded-lg overflow-hidden border border-border h-32">
-              <img src={hero.bgImage} alt="Preview" className="w-full h-full object-cover" />
-            </div>
-          )}
+        <AdminField label="Imagem de Fundo">
+          <ImageUpload value={hero.bgImage} onChange={url => update('bgImage', url)} />
         </AdminField>
 
         <AdminField label="Tag Line" hint="Texto pequeno acima do título">
-          <input
-            type="text"
-            value={hero.tag}
-            onChange={e => update('tag', e.target.value)}
-            className="admin-input"
-          />
+          <input type="text" value={hero.tag} onChange={e => update('tag', e.target.value)} className="admin-input" />
         </AdminField>
 
         <AdminField label="Título Principal" hint="Frase de impacto principal">
-          <textarea
-            value={hero.title}
-            onChange={e => update('title', e.target.value)}
-            rows={3}
-            className="admin-input resize-none"
-          />
+          <textarea value={hero.title} onChange={e => update('title', e.target.value)} rows={3} className="admin-input resize-none" />
         </AdminField>
 
         <AdminField label="Subtítulo" hint="Texto descritivo abaixo do título">
-          <textarea
-            value={hero.subtitle}
-            onChange={e => update('subtitle', e.target.value)}
-            rows={3}
-            className="admin-input resize-none"
-          />
+          <textarea value={hero.subtitle} onChange={e => update('subtitle', e.target.value)} rows={3} className="admin-input resize-none" />
         </AdminField>
 
         <AdminField label="Texto do Botão CTA">
-          <input
-            type="text"
-            value={hero.ctaText}
-            onChange={e => update('ctaText', e.target.value)}
-            className="admin-input"
-          />
+          <input type="text" value={hero.ctaText} onChange={e => update('ctaText', e.target.value)} className="admin-input" />
         </AdminField>
       </div>
     </div>

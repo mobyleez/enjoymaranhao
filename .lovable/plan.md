@@ -1,38 +1,30 @@
 
 
-# Upload de Imagens via Supabase Storage
+# Configurar banco de dados Supabase e admin
 
-Substituir os campos de URL por upload direto de arquivos nos editores admin (Hero, Destinos, Galeria).
+O banco de dados está completamente vazio. Preciso criar todas as tabelas que o código espera e configurar o usuário administrador.
 
-## Infraestrutura
+## Passo 1 — Migração SQL (tabelas + RLS + função)
 
-**1. Criar bucket no Supabase Storage** via migração SQL:
-- Bucket `site-images`, público, para servir as imagens diretamente
-- Políticas RLS: upload/delete para authenticated com role admin, leitura pública
+Criar via migration tool:
 
-## Componente Reutilizável
+1. **Enum `app_role`** — com valores `admin`, `moderator`, `user`
+2. **Tabela `user_roles`** — `id`, `user_id` (ref auth.users), `role` (app_role), unique constraint
+3. **Tabela `site_content`** — `id` (text PK, default 'main'), `data` (jsonb), `updated_at` (timestamptz)
+4. **Tabela `contact_leads`** — `id` (uuid PK), `name`, `email`, `phone`, `travel_date`, `message`, `created_at`
+5. **Função `has_role`** — security definer para checar roles sem recursão RLS
+6. **Políticas RLS**:
+   - `user_roles`: leitura para authenticated
+   - `site_content`: leitura pública, escrita para admins
+   - `contact_leads`: inserção pública (anon), leitura para admins
 
-**2. Criar `ImageUpload` component** (`src/components/admin/ImageUpload.tsx`):
-- Input file (accept image/*) com botão de upload estilizado
-- Preview da imagem atual
-- Ao selecionar arquivo: faz upload para `storage/site-images/{timestamp}-{filename}`
-- Retorna a URL pública via callback `onUpload(url)`
-- Mostra loading spinner durante upload
-- Mantém opção de colar URL manualmente (fallback)
+## Passo 2 — Criar usuário admin
 
-## Atualizar Editores
+1. O usuário precisa criar a conta `mobyleezlab@gmail.com` no painel Supabase Auth (ou posso orientar a criação via dashboard)
+2. Inserir a role `admin` na tabela `user_roles` para esse usuário
 
-**3. Substituir inputs de URL nos 3 editores:**
-- `HeroEditor.tsx` — campo `bgImage`
-- `DestinationsEditor.tsx` — campo `image` de cada destino
-- `GalleryEditor.tsx` — campo `image` de cada item
+## Notas
 
-Cada campo de imagem passará a usar o componente `ImageUpload` em vez de `<input type="text">`.
-
-## Detalhes Técnicos
-
-- Upload usa `supabase.storage.from('site-images').upload(path, file)`
-- URL pública via `supabase.storage.from('site-images').getPublicUrl(path)`
-- Nomes de arquivo com prefixo timestamp para evitar colisões
-- Bucket público para que as imagens sejam acessíveis sem autenticação na landing page
+- O usuário precisará definir uma senha para `mobyleezlab@gmail.com` no dashboard do Supabase em Authentication > Users
+- Após criar o usuário, pegaremos o `user_id` para inserir na `user_roles`
 

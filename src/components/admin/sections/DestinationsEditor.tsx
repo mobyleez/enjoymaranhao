@@ -1,5 +1,6 @@
 import { useSiteContent } from '@/contexts/SiteContentContext';
 import AdminField from '../AdminField';
+import ImageUpload from '../ImageUpload';
 
 const DestinationsEditor = () => {
   const { content, updateSection } = useSiteContent();
@@ -24,45 +25,19 @@ const DestinationsEditor = () => {
               {i === 0 ? '★ Destaque (card grande)' : `Destino ${i + 1}`}
             </p>
 
-            <AdminField label="Imagem de Fundo" hint="URL da imagem">
-              <input
-                type="text"
-                value={dest.image}
-                onChange={e => update(i, 'image', e.target.value)}
-                placeholder="https://images.unsplash.com/..."
-                className="admin-input"
-              />
-              {dest.image && (
-                <div className="mt-2 rounded-lg overflow-hidden border border-border h-24">
-                  <img src={dest.image} alt="Preview" className="w-full h-full object-cover" />
-                </div>
-              )}
+            <AdminField label="Imagem de Fundo">
+              <ImageUpload value={dest.image} onChange={url => update(i, 'image', url)} previewHeight="h-24" />
             </AdminField>
 
             <AdminField label="Nome do Destino">
-              <input
-                type="text"
-                value={dest.name}
-                onChange={e => update(i, 'name', e.target.value)}
-                className="admin-input"
-              />
+              <input type="text" value={dest.name} onChange={e => update(i, 'name', e.target.value)} className="admin-input" />
             </AdminField>
             <div className="grid grid-cols-2 gap-4">
               <AdminField label="Tag / Badge">
-                <input
-                  type="text"
-                  value={dest.tag}
-                  onChange={e => update(i, 'tag', e.target.value)}
-                  className="admin-input"
-                />
+                <input type="text" value={dest.tag} onChange={e => update(i, 'tag', e.target.value)} className="admin-input" />
               </AdminField>
               <AdminField label="Subtítulo">
-                <input
-                  type="text"
-                  value={dest.sub}
-                  onChange={e => update(i, 'sub', e.target.value)}
-                  className="admin-input"
-                />
+                <input type="text" value={dest.sub} onChange={e => update(i, 'sub', e.target.value)} className="admin-input" />
               </AdminField>
             </div>
           </div>

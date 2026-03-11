@@ -1,5 +1,6 @@
 import { useSiteContent } from '@/contexts/SiteContentContext';
 import AdminField from '../AdminField';
+import ImageUpload from '../ImageUpload';
 
 const GalleryEditor = () => {
   const { content, updateSection } = useSiteContent();
@@ -24,28 +25,12 @@ const GalleryEditor = () => {
               Imagem {i + 1}
             </p>
 
-            <AdminField label="URL da Imagem" hint="Unsplash ou link direto">
-              <input
-                type="text"
-                value={item.image}
-                onChange={e => update(i, 'image', e.target.value)}
-                placeholder="https://images.unsplash.com/..."
-                className="admin-input"
-              />
-              {item.image && (
-                <div className="mt-2 rounded-lg overflow-hidden border border-border h-24">
-                  <img src={item.image} alt="Preview" className="w-full h-full object-cover" />
-                </div>
-              )}
+            <AdminField label="Imagem">
+              <ImageUpload value={item.image} onChange={url => update(i, 'image', url)} previewHeight="h-24" />
             </AdminField>
 
             <AdminField label="Legenda">
-              <input
-                type="text"
-                value={item.label}
-                onChange={e => update(i, 'label', e.target.value)}
-                className="admin-input"
-              />
+              <input type="text" value={item.label} onChange={e => update(i, 'label', e.target.value)} className="admin-input" />
             </AdminField>
           </div>
         ))}
