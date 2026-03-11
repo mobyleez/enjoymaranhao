@@ -26,9 +26,15 @@ const Experiences = () => {
             style={{ transitionDelay: `${i * 0.08}s` }}
           >
             <div className="absolute top-0 left-0 right-0 h-1 grad-bg scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100" />
-            <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-xl lg:rounded-[14px] grad-bg-diag flex items-center justify-center text-xl lg:text-2xl mb-4 lg:mb-6">
-              {exp.icon}
-            </div>
+            {exp.imageUrl ? (
+              <div className="w-full h-32 rounded-xl mb-4 lg:mb-6 overflow-hidden">
+                <img src={exp.imageUrl} alt={exp.title} className="w-full h-full object-cover" />
+              </div>
+            ) : (
+              <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-xl lg:rounded-[14px] grad-bg-diag flex items-center justify-center text-xl lg:text-2xl mb-4 lg:mb-6">
+                {exp.icon}
+              </div>
+            )}
             <span className="font-playfair text-[12px] lg:text-[13px] font-bold grad-text block mb-2 lg:mb-3">{exp.num}</span>
             <h3 className="font-playfair text-lg lg:text-[22px] font-bold text-secondary-foreground mb-2 lg:mb-3 leading-[1.25]">{exp.title}</h3>
             <p className="text-sm text-[#666] leading-[1.7] lg:leading-[1.8] font-light">{exp.desc}</p>
