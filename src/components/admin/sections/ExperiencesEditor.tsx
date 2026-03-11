@@ -1,11 +1,12 @@
 import { useSiteContent } from '@/contexts/SiteContentContext';
 import AdminField from '../AdminField';
+import ImageUpload from '../ImageUpload';
 
 const ExperiencesEditor = () => {
   const { content, updateSection } = useSiteContent();
   const experiences = content.experiences;
 
-  const update = (index: number, field: 'icon' | 'title' | 'desc', value: string) => {
+  const update = (index: number, field: 'icon' | 'title' | 'desc' | 'imageUrl', value: string) => {
     const updated = experiences.map((e, i) => i === index ? { ...e, [field]: value } : e);
     updateSection('experiences', updated);
   };
@@ -21,6 +22,15 @@ const ExperiencesEditor = () => {
         {experiences.map((exp, i) => (
           <div key={i} className="bg-muted/20 border border-border rounded-xl p-5 space-y-4">
             <p className="text-xs tracking-[2px] uppercase font-semibold grad-text">Experiência {exp.num}</p>
+
+            <AdminField label="Imagem (opcional)">
+              <ImageUpload
+                value={exp.imageUrl ?? ''}
+                onChange={url => update(i, 'imageUrl', url)}
+                previewHeight="h-24"
+              />
+            </AdminField>
+
             <div className="grid grid-cols-[80px_1fr] gap-4">
               <AdminField label="Ícone (emoji)">
                 <input

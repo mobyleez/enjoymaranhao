@@ -19,6 +19,7 @@ export interface ExperienceItem {
   num: string;
   title: string;
   desc: string;
+  imageUrl?: string;
 }
 
 export interface PackageItem {
