@@ -54,6 +54,16 @@ const CTAEditor = () => {
             />
           </AdminField>
         </div>
+
+        <AdminField label="Número do WhatsApp" hint="Formato internacional, ex: 5598999990000">
+          <input
+            type="text"
+            value={cta.whatsappNumber}
+            onChange={e => update('whatsappNumber', e.target.value)}
+            placeholder="5598999990000"
+            className="admin-input"
+          />
+        </AdminField>
       </div>
     </div>
   );

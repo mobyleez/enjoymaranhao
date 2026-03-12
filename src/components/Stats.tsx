@@ -16,8 +16,8 @@ const Stats = () => {
             className={`py-4 lg:py-10 px-4 lg:px-12 relative group ${i < stats.length - 1 ? 'lg:border-r lg:border-[rgba(0,0,0,0.08)]' : ''} ${i === 1 ? 'max-lg:border-r-0' : ''}`}
           >
             <div className="absolute top-0 left-0 right-0 h-[3px] grad-bg scale-x-0 origin-left transition-transform duration-[600ms] group-hover:scale-x-100" />
-            <p className="font-playfair font-black leading-none tracking-[-1px] lg:tracking-[-2px] text-secondary-foreground" style={{ fontSize: 'clamp(32px, 5vw, 72px)' }}>
-              {stat.num}<span className="grad-text">{stat.suffix}</span>
+            <p className="font-playfair font-black leading-none tracking-[-1px] lg:tracking-[-2px] grad-text" style={{ fontSize: 'clamp(32px, 5vw, 72px)' }}>
+              {stat.num}{stat.suffix}
             </p>
             <p className="text-[10px] lg:text-xs text-[#777] tracking-[1px] lg:tracking-[2px] uppercase mt-1 lg:mt-2 font-medium">{stat.label}</p>
           </div>

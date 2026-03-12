@@ -18,9 +18,13 @@ const Footer = () => {
 
       <div className="grid grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-8 lg:gap-12 mb-10 lg:mb-[60px]">
         <div className="col-span-2 lg:col-span-1">
-          <p className="font-playfair font-bold text-lg mb-4 lg:mb-5">
-            <span className="grad-text">ENJOY</span> MARANHÃO
-          </p>
+          {content.logoUrl ? (
+            <img src={content.logoUrl} alt="Logo" className="h-10 lg:h-12 mb-4 lg:mb-5 object-contain" />
+          ) : (
+            <p className="font-playfair font-bold text-lg mb-4 lg:mb-5">
+              <span className="grad-text">ENJOY</span> MARANHÃO
+            </p>
+          )}
           <p className="text-sm lg:text-[13px] text-[rgba(255,255,255,0.35)] leading-[1.8] lg:leading-[1.9] font-light max-w-[280px] lg:max-w-[240px]">
             {footer.description}
           </p>
@@ -71,7 +75,15 @@ const Footer = () => {
           © 2026 Enjoy Maranhão. Todos os direitos reservados.
         </p>
         <p className="text-[11px] text-[rgba(255,255,255,0.2)] tracking-[1px]">
-          Feito com paixão pelo Maranhão ✦
+          Desenvolvido por{' '}
+          <a
+            href="https://mobyleez.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[rgba(255,255,255,0.35)] hover:text-white transition-colors duration-200"
+          >
+            Mobyleez
+          </a>
         </p>
       </div>
     </footer>

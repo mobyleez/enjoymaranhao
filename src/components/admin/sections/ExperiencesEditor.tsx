@@ -2,6 +2,21 @@ import { useSiteContent } from '@/contexts/SiteContentContext';
 import AdminField from '../AdminField';
 import ImageUpload from '../ImageUpload';
 
+const iconOptions = [
+  { value: 'mountain', label: '⛰️ Mountain' },
+  { value: 'music', label: '🎵 Music' },
+  { value: 'utensils', label: '🍴 Utensils' },
+  { value: 'sailboat', label: '⛵ Sailboat' },
+  { value: 'landmark', label: '🏛️ Landmark' },
+  { value: 'sunset', label: '🌅 Sunset' },
+  { value: 'compass', label: '🧭 Compass' },
+  { value: 'camera', label: '📷 Camera' },
+  { value: 'tree', label: '🌲 Tree' },
+  { value: 'waves', label: '🌊 Waves' },
+  { value: 'tent', label: '⛺ Tent' },
+  { value: 'star', label: '⭐ Star' },
+];
+
 const ExperiencesEditor = () => {
   const { content, updateSection } = useSiteContent();
   const experiences = content.experiences;
@@ -31,14 +46,17 @@ const ExperiencesEditor = () => {
               />
             </AdminField>
 
-            <div className="grid grid-cols-[80px_1fr] gap-4">
-              <AdminField label="Ícone (emoji)">
-                <input
-                  type="text"
+            <div className="grid grid-cols-[120px_1fr] gap-4">
+              <AdminField label="Ícone">
+                <select
                   value={exp.icon}
                   onChange={e => update(i, 'icon', e.target.value)}
-                  className="admin-input text-center text-2xl"
-                />
+                  className="admin-input"
+                >
+                  {iconOptions.map(opt => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  ))}
+                </select>
               </AdminField>
               <AdminField label="Título">
                 <input
