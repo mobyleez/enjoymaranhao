@@ -28,8 +28,6 @@ const Hero = () => {
         01
       </div>
 
-      {/* Gradient line */}
-      <div className="absolute left-0 right-0 h-[2px] grad-bg opacity-40 bottom-[120px] animate-line-reveal hidden md:block" />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col gap-8 lg:gap-10">

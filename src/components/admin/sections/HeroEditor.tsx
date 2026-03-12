@@ -3,11 +3,15 @@ import AdminField from '../AdminField';
 import ImageUpload from '../ImageUpload';
 
 const HeroEditor = () => {
-  const { content, updateSection } = useSiteContent();
+  const { content, updateSection, updateContent } = useSiteContent();
   const hero = content.hero;
 
   const update = (field: keyof typeof hero, value: string) => {
     updateSection('hero', { ...hero, [field]: value });
+  };
+
+  const updateLogo = (url: string) => {
+    updateContent({ ...content, logoUrl: url });
   };
 
   return (
@@ -18,6 +22,10 @@ const HeroEditor = () => {
       </div>
 
       <div className="space-y-5">
+        <AdminField label="Logo do Site" hint="Aparece no header e no rodapé. Deixe vazio para usar o texto padrão.">
+          <ImageUpload value={content.logoUrl ?? ''} onChange={updateLogo} previewHeight="h-16" />
+        </AdminField>
+
         <AdminField label="Imagem de Fundo">
           <ImageUpload value={hero.bgImage} onChange={url => update('bgImage', url)} />
         </AdminField>

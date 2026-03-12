@@ -32,6 +32,10 @@ const CTASection = () => {
     defaultValues: { name: '', email: '', phone: '', message: '' },
   });
 
+  const whatsappUrl = cta.whatsappNumber
+    ? `https://wa.me/${cta.whatsappNumber.replace(/\D/g, '')}`
+    : '#';
+
   const onSubmit = async (data: ContactFormData) => {
     try {
       const { error } = await supabase.from('contact_leads').insert({
@@ -96,7 +100,12 @@ const CTASection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center lg:justify-start">
-            <a href="#" className="inline-flex items-center justify-center min-h-[52px] py-4 lg:py-[18px] px-8 lg:px-10 rounded-full border border-[rgba(255,255,255,0.15)] text-[rgba(255,255,255,0.6)] text-xs lg:text-[13px] tracking-[2px] uppercase font-medium no-underline font-dm transition-all duration-300 hover:border-[rgba(255,255,255,0.4)] hover:text-white">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center min-h-[52px] py-4 lg:py-[18px] px-8 lg:px-10 rounded-full border border-[rgba(255,255,255,0.15)] text-[rgba(255,255,255,0.6)] text-xs lg:text-[13px] tracking-[2px] uppercase font-medium no-underline font-dm transition-all duration-300 hover:border-[rgba(255,255,255,0.4)] hover:text-white"
+            >
               {cta.secondaryBtn}
             </a>
           </div>

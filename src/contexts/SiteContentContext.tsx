@@ -47,6 +47,7 @@ export interface GalleryItem {
 }
 
 export interface SiteContent {
+  logoUrl?: string;
   hero: {
     tag: string;
     title: string;
@@ -68,6 +69,7 @@ export interface SiteContent {
     description: string;
     primaryBtn: string;
     secondaryBtn: string;
+    whatsappNumber: string;
   };
   footer: {
     description: string;
@@ -80,6 +82,7 @@ export interface SiteContent {
 }
 
 export const defaultContent: SiteContent = {
+  logoUrl: '',
   hero: {
     tag: 'TURISMO · MARANHÃO · BRASIL',
     title: 'O Brasil que poucos conhecem. Todos deveriam.',
@@ -101,12 +104,12 @@ export const defaultContent: SiteContent = {
     { name: 'Delta do Parnaíba', tag: 'Aventura', sub: 'Encontro do rio com o mar', image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80' },
   ],
   experiences: [
-    { icon: '🏜️', num: '01', title: 'Trekking nas Dunas', desc: 'Percorra a pé as dunas brancas dos Lençóis Maranhenses ao pôr do sol. Um espetáculo que muda para sempre a sua percepção de beleza natural.' },
-    { icon: '🥁', num: '02', title: 'Bumba Meu Boi', desc: 'Mergulhe no maior festival folclórico do Brasil. Cores, ritmos e histórias que revelam a alma mais profunda do povo maranhense.' },
-    { icon: '🍽️', num: '03', title: 'Gastronomia Local', desc: 'Do arroz de cuxá ao torresmo de tambaqui, a culinária maranhense é um patrimônio vivo. Prove sabores que só existem aqui.' },
-    { icon: '🛶', num: '04', title: 'Passeio de Lancha', desc: 'Navegue pelo rio Preguiças entre manguezais, restingas e comunidades quilombolas. Uma jornada ao coração mais genuíno do Maranhão.' },
-    { icon: '🏛️', num: '05', title: 'Centro Histórico', desc: 'Caminhe pelos azulejos portugueses de São Luís, Patrimônio da Humanidade pela UNESCO. Arquitetura colonial que respira história em cada esquina.' },
-    { icon: '🌅', num: '06', title: 'Pôr do Sol na Lagoa', desc: 'As lagoas dos Lençóis refletem o céu em cores impossíveis no entardecer. O momento mais fotográfico do Maranhão é também o mais contemplativo.' },
+    { icon: 'mountain', num: '01', title: 'Trekking nas Dunas', desc: 'Percorra a pé as dunas brancas dos Lençóis Maranhenses ao pôr do sol. Um espetáculo que muda para sempre a sua percepção de beleza natural.' },
+    { icon: 'music', num: '02', title: 'Bumba Meu Boi', desc: 'Mergulhe no maior festival folclórico do Brasil. Cores, ritmos e histórias que revelam a alma mais profunda do povo maranhense.' },
+    { icon: 'utensils', num: '03', title: 'Gastronomia Local', desc: 'Do arroz de cuxá ao torresmo de tambaqui, a culinária maranhense é um patrimônio vivo. Prove sabores que só existem aqui.' },
+    { icon: 'sailboat', num: '04', title: 'Passeio de Lancha', desc: 'Navegue pelo rio Preguiças entre manguezais, restingas e comunidades quilombolas. Uma jornada ao coração mais genuíno do Maranhão.' },
+    { icon: 'landmark', num: '05', title: 'Centro Histórico', desc: 'Caminhe pelos azulejos portugueses de São Luís, Patrimônio da Humanidade pela UNESCO. Arquitetura colonial que respira história em cada esquina.' },
+    { icon: 'sunset', num: '06', title: 'Pôr do Sol na Lagoa', desc: 'As lagoas dos Lençóis refletem o céu em cores impossíveis no entardecer. O momento mais fotográfico do Maranhão é também o mais contemplativo.' },
   ],
   manifesto: {
     quote: 'O Maranhão não é um destino.\nÉ uma descoberta que acontece\numa vez, mas fica para sempre.',
@@ -178,6 +181,7 @@ export const defaultContent: SiteContent = {
     description: 'Deixe-nos criar a viagem perfeita para você. O Maranhão espera — e nós estamos prontos para guiá-lo.',
     primaryBtn: 'PLANEJAR MINHA VIAGEM',
     secondaryBtn: 'FALAR NO WHATSAPP',
+    whatsappNumber: '5598999990000',
   },
   footer: {
     description: 'Somos apaixonados pelo Maranhão. Nossa missão é conectar viajantes às experiências mais autênticas e transformadoras deste estado único.',

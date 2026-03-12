@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useSiteContent } from '@/contexts/SiteContentContext';
 import MobileMenu from './MobileMenu';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const { content } = useSiteContent();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -16,10 +18,14 @@ const Navbar = () => {
         scrolled ? 'bg-[rgba(13,13,13,0.85)] backdrop-blur-[20px] border-b border-[rgba(255,255,255,0.06)]' : ''
       }`}
     >
-      <div className="font-playfair text-lg font-bold tracking-wider">
-        <span className="grad-text">ENJOY</span>
-        <span className="text-foreground ml-1">MARANHÃO</span>
-      </div>
+      {content.logoUrl ? (
+        <img src={content.logoUrl} alt="Logo" className="h-8 lg:h-10 object-contain" />
+      ) : (
+        <div className="font-playfair text-lg font-bold tracking-wider">
+          <span className="grad-text">ENJOY</span>
+          <span className="text-foreground ml-1">MARANHÃO</span>
+        </div>
+      )}
 
       <ul className="hidden lg:flex gap-10 list-none">
         {['Destinos', 'Experiências', 'Pacotes', 'Contato'].map((item) => (
