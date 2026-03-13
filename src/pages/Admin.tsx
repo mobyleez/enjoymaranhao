@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ExternalLink, RotateCcw, Save, LayoutDashboard, Image, BarChart3, MapPin, Sparkles, BookOpen, Package, Megaphone, Footprints, LogOut, Images } from 'lucide-react';
+import { ExternalLink, RotateCcw, Save, LayoutDashboard, Image, BarChart3, MapPin, Sparkles, BookOpen, Package, Megaphone, Footprints, LogOut, Images, MessageSquareQuote } from 'lucide-react';
 import AdminLogin from '@/components/admin/AdminLogin';
 import HeroEditor from '@/components/admin/sections/HeroEditor';
 import StatsEditor from '@/components/admin/sections/StatsEditor';
