@@ -10,6 +10,7 @@ import PackagesEditor from '@/components/admin/sections/PackagesEditor';
 import CTAEditor from '@/components/admin/sections/CTAEditor';
 import FooterEditor from '@/components/admin/sections/FooterEditor';
 import GalleryEditor from '@/components/admin/sections/GalleryEditor';
+import TestimonialsEditor from '@/components/admin/sections/TestimonialsEditor';
 import { useSiteContent } from '@/contexts/SiteContentContext';
 import { toast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
