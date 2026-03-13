@@ -15,7 +15,7 @@ const DestinationsEditor = () => {
     <div className="space-y-6">
       <div>
         <h2 className="font-playfair text-2xl font-bold text-foreground mb-1">Destinos</h2>
-        <p className="text-sm text-muted-foreground">Os 5 cards de destino exibidos na grade de destinos.</p>
+        <p className="text-sm text-muted-foreground">Os 7 cards de destino exibidos na grade de destinos.</p>
       </div>
 
       <div className="space-y-4">
