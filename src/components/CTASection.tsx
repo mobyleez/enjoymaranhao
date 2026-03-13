@@ -109,18 +109,6 @@ const CTASection = () => {
               {cta.secondaryBtn}
             </a>
           </div>
-
-          {/* Partner Logos */}
-          {cta.partnerLogos?.some(l => l) && (
-            <div className="mt-10 lg:mt-14">
-              <p className="text-[10px] tracking-[3px] uppercase text-[rgba(255,255,255,0.25)] mb-4 font-medium">Parceiros</p>
-              <div className="flex items-center gap-6 flex-wrap justify-center lg:justify-start">
-                {cta.partnerLogos.filter(l => l).map((logo, i) => (
-                  <img key={i} src={logo} alt={`Parceiro ${i + 1}`} className="h-8 lg:h-10 object-contain opacity-50 hover:opacity-100 transition-opacity duration-300" />
-                ))}
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Right: Contact Form */}
