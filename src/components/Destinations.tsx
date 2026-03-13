@@ -21,7 +21,7 @@ const Destinations = () => {
         </a>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr] lg:grid-rows-2 gap-3 lg:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr] lg:grid-rows-3 gap-3 lg:gap-4">
         {destinations.map((dest, i) => (
           <div
             key={i}

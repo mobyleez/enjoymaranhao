@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ExternalLink, RotateCcw, Save, LayoutDashboard, Image, BarChart3, MapPin, Sparkles, BookOpen, Package, Megaphone, Footprints, LogOut, Images } from 'lucide-react';
+import { ExternalLink, RotateCcw, Save, LayoutDashboard, Image, BarChart3, MapPin, Sparkles, BookOpen, Package, Megaphone, Footprints, LogOut, Images, MessageSquareQuote } from 'lucide-react';
 import AdminLogin from '@/components/admin/AdminLogin';
 import HeroEditor from '@/components/admin/sections/HeroEditor';
 import StatsEditor from '@/components/admin/sections/StatsEditor';
@@ -10,6 +10,7 @@ import PackagesEditor from '@/components/admin/sections/PackagesEditor';
 import CTAEditor from '@/components/admin/sections/CTAEditor';
 import FooterEditor from '@/components/admin/sections/FooterEditor';
 import GalleryEditor from '@/components/admin/sections/GalleryEditor';
+import TestimonialsEditor from '@/components/admin/sections/TestimonialsEditor';
 import { useSiteContent } from '@/contexts/SiteContentContext';
 import { toast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
@@ -20,6 +21,7 @@ const sections = [
   { id: 'stats', label: 'Estatísticas', icon: BarChart3, desc: '4 números de destaque' },
   { id: 'destinations', label: 'Destinos', icon: MapPin, desc: '5 cards de destinos' },
   { id: 'gallery', label: 'Galeria', icon: Images, desc: '6 imagens do carrossel' },
+  { id: 'testimonials', label: 'Avaliações', icon: MessageSquareQuote, desc: 'Depoimentos de clientes' },
   { id: 'experiences', label: 'Experiências', icon: Sparkles, desc: '6 cards de experiências' },
   { id: 'manifesto', label: 'Manifesto', icon: BookOpen, desc: 'Citação em destaque' },
   { id: 'packages', label: 'Pacotes', icon: Package, desc: '3 pacotes de viagem' },
@@ -32,6 +34,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
   stats: <StatsEditor />,
   destinations: <DestinationsEditor />,
   gallery: <GalleryEditor />,
+  testimonials: <TestimonialsEditor />,
   experiences: <ExperiencesEditor />,
   manifesto: <ManifestoEditor />,
   packages: <PackagesEditor />,
