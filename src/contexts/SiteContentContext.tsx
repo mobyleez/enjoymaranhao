@@ -219,6 +219,8 @@ export const defaultContent: SiteContent = {
     whatsapp: 'WhatsApp',
     instagram: 'Instagram',
     address: 'São Luís — MA',
+    partnerLogos: ['', '', '', ''],
+    partnerLogoSize: 40,
   },
 };
 
