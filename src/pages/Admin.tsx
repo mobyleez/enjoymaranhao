@@ -21,6 +21,7 @@ const sections = [
   { id: 'stats', label: 'Estatísticas', icon: BarChart3, desc: '4 números de destaque' },
   { id: 'destinations', label: 'Destinos', icon: MapPin, desc: '5 cards de destinos' },
   { id: 'gallery', label: 'Galeria', icon: Images, desc: '6 imagens do carrossel' },
+  { id: 'testimonials', label: 'Avaliações', icon: MessageSquareQuote, desc: 'Depoimentos de clientes' },
   { id: 'experiences', label: 'Experiências', icon: Sparkles, desc: '6 cards de experiências' },
   { id: 'manifesto', label: 'Manifesto', icon: BookOpen, desc: 'Citação em destaque' },
   { id: 'packages', label: 'Pacotes', icon: Package, desc: '3 pacotes de viagem' },
