@@ -192,12 +192,23 @@ export const defaultContent: SiteContent = {
     { label: 'São Luís noturna', image: 'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=600&q=80' },
     { label: 'Delta do Parnaíba', image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80' },
   ],
+  testimonials: {
+    heading: 'O que nossos clientes dizem.',
+    ratingLabel: 'EXCELENTE',
+    ratingCount: 'com base em 36 avaliações Google',
+    items: [
+      { name: 'Analu Danieli', date: 'Março 2025', text: 'Muito boa, o atendimento foi excepcional. A Amanda, que nos atendeu, foi extremamente atenciosa e solicita. Nos ajudou em todas as demandas e respondia rapidamente, inclusive durante a madrugada.', rating: 5 },
+      { name: 'Ana Paula Queiroz', date: 'Janeiro 2025', text: 'Enjoy proporcionou momentos incríveis na minha visita aos lençóis maranhenses! O roteiro ficou incrível e conseguimos aproveitar o máximo desse lugar tão lindo! Super recomendo!', rating: 5 },
+      { name: 'Andressa Santos', date: 'Janeiro 2025', text: 'Simplesmente fantástico! Júlio nos proporcionou férias incríveis, férias maravilhosas. Fomos na alta temporada e, óbvio, conseguimos aproveitar tudo ao máximo.', rating: 5 },
+    ],
+  },
   cta: {
     title: 'Sua próxima aventura começa aqui.',
     description: 'Deixe-nos criar a viagem perfeita para você. O Maranhão espera — e nós estamos prontos para guiá-lo.',
     primaryBtn: 'PLANEJAR MINHA VIAGEM',
     secondaryBtn: 'FALAR NO WHATSAPP',
     whatsappNumber: '5598999990000',
+    partnerLogos: ['', '', '', ''],
   },
   footer: {
     description: 'Somos apaixonados pelo Maranhão. Nossa missão é conectar viajantes às experiências mais autênticas e transformadoras deste estado único.',
