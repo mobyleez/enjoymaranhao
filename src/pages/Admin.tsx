@@ -34,6 +34,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
   stats: <StatsEditor />,
   destinations: <DestinationsEditor />,
   gallery: <GalleryEditor />,
+  testimonials: <TestimonialsEditor />,
   experiences: <ExperiencesEditor />,
   manifesto: <ManifestoEditor />,
   packages: <PackagesEditor />,
