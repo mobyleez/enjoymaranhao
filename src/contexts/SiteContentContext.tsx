@@ -83,7 +83,6 @@ export interface SiteContent {
     primaryBtn: string;
     secondaryBtn: string;
     whatsappNumber: string;
-    partnerLogos: string[];
   };
   footer: {
     description: string;
@@ -92,6 +91,8 @@ export interface SiteContent {
     whatsapp: string;
     instagram: string;
     address: string;
+    partnerLogos: string[];
+    partnerLogoSize?: number;
   };
 }
 
@@ -208,7 +209,6 @@ export const defaultContent: SiteContent = {
     primaryBtn: 'PLANEJAR MINHA VIAGEM',
     secondaryBtn: 'FALAR NO WHATSAPP',
     whatsappNumber: '5598999990000',
-    partnerLogos: ['', '', '', ''],
   },
   footer: {
     description: 'Somos apaixonados pelo Maranhão. Nossa missão é conectar viajantes às experiências mais autênticas e transformadoras deste estado único.',
@@ -217,6 +217,8 @@ export const defaultContent: SiteContent = {
     whatsapp: 'WhatsApp',
     instagram: 'Instagram',
     address: 'São Luís — MA',
+    partnerLogos: ['', '', '', ''],
+    partnerLogoSize: 40,
   },
 };
 

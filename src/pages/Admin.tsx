@@ -19,7 +19,7 @@ import { supabase } from '@/integrations/supabase/client';
 const sections = [
   { id: 'hero', label: 'Hero', icon: Image, desc: 'Título e CTA principal' },
   { id: 'stats', label: 'Estatísticas', icon: BarChart3, desc: '4 números de destaque' },
-  { id: 'destinations', label: 'Destinos', icon: MapPin, desc: '5 cards de destinos' },
+  { id: 'destinations', label: 'Destinos', icon: MapPin, desc: '7 cards de destinos' },
   { id: 'gallery', label: 'Galeria', icon: Images, desc: '6 imagens do carrossel' },
   { id: 'testimonials', label: 'Avaliações', icon: MessageSquareQuote, desc: 'Depoimentos de clientes' },
   { id: 'experiences', label: 'Experiências', icon: Sparkles, desc: '6 cards de experiências' },

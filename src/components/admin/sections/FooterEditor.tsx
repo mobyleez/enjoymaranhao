@@ -1,12 +1,19 @@
 import { useSiteContent } from '@/contexts/SiteContentContext';
 import AdminField from '../AdminField';
+import ImageUpload from '../ImageUpload';
 
 const FooterEditor = () => {
   const { content, updateSection } = useSiteContent();
   const footer = content.footer;
 
-  const update = (field: keyof typeof footer, value: string) => {
+  const update = <K extends keyof typeof footer>(field: K, value: typeof footer[K]) => {
     updateSection('footer', { ...footer, [field]: value });
+  };
+
+  const updateLogo = (index: number, url: string) => {
+    const logos = [...(footer.partnerLogos || ['', '', '', ''])];
+    logos[index] = url;
+    update('partnerLogos', logos);
   };
 
   return (
@@ -25,6 +32,29 @@ const FooterEditor = () => {
             className="admin-input resize-none"
           />
         </AdminField>
+
+        {/* Partner Logos */}
+        <div>
+          <h3 className="text-xs tracking-[2px] uppercase font-semibold text-foreground/80 mb-3">Logos de Parceiros</h3>
+          <p className="text-[11px] text-muted-foreground mb-4">4 logos exibidos entre as linhas no topo do rodapé.</p>
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            {(footer.partnerLogos || ['', '', '', '']).map((logo, i) => (
+              <AdminField key={i} label={`Parceiro ${i + 1}`}>
+                <ImageUpload value={logo} onChange={url => updateLogo(i, url)} previewHeight="h-16" />
+              </AdminField>
+            ))}
+          </div>
+          <AdminField label="Altura dos logos (px)" hint="Ajuste o tamanho dos logos de parceiros">
+            <input
+              type="number"
+              value={footer.partnerLogoSize || 40}
+              onChange={e => update('partnerLogoSize', Number(e.target.value))}
+              min={20}
+              max={120}
+              className="admin-input w-32"
+            />
+          </AdminField>
+        </div>
 
         <div className="space-y-4">
           <p className="text-xs tracking-[2px] uppercase font-semibold text-muted-foreground">Contato</p>

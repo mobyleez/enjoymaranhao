@@ -1,19 +1,12 @@
 import { useSiteContent } from '@/contexts/SiteContentContext';
 import AdminField from '../AdminField';
-import ImageUpload from '../ImageUpload';
 
 const CTAEditor = () => {
   const { content, updateSection } = useSiteContent();
   const cta = content.cta;
 
-  const update = (field: keyof typeof cta, value: string | string[]) => {
+  const update = (field: keyof typeof cta, value: string) => {
     updateSection('cta', { ...cta, [field]: value });
-  };
-
-  const updateLogo = (index: number, url: string) => {
-    const logos = [...(cta.partnerLogos || ['', '', '', ''])];
-    logos[index] = url;
-    update('partnerLogos', logos);
   };
 
   return (
@@ -54,18 +47,6 @@ const CTAEditor = () => {
         <AdminField label="Número do WhatsApp" hint="Formato internacional, ex: 5598999990000">
           <input type="text" value={cta.whatsappNumber} onChange={e => update('whatsappNumber', e.target.value)} placeholder="5598999990000" className="admin-input" />
         </AdminField>
-
-        <div>
-          <h3 className="text-xs tracking-[2px] uppercase font-semibold text-foreground/80 mb-3">Logos de Parceiros</h3>
-          <p className="text-[11px] text-muted-foreground mb-4">4 logos exibidos abaixo da linha na seção de contato.</p>
-          <div className="grid grid-cols-2 gap-4">
-            {(cta.partnerLogos || ['', '', '', '']).map((logo, i) => (
-              <AdminField key={i} label={`Parceiro ${i + 1}`}>
-                <ImageUpload value={logo} onChange={url => updateLogo(i, url)} previewHeight="h-16" />
-              </AdminField>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );
