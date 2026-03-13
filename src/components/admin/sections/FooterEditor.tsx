@@ -6,7 +6,7 @@ const FooterEditor = () => {
   const { content, updateSection } = useSiteContent();
   const footer = content.footer;
 
-  const update = (field: keyof typeof footer, value: unknown) => {
+  const update = <K extends keyof typeof footer>(field: K, value: typeof footer[K]) => {
     updateSection('footer', { ...footer, [field]: value });
   };
 
