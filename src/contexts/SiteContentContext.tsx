@@ -92,6 +92,8 @@ export interface SiteContent {
     whatsapp: string;
     instagram: string;
     address: string;
+    partnerLogos: string[];
+    partnerLogoSize?: number;
   };
 }
 
