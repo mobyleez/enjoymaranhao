@@ -209,7 +209,6 @@ export const defaultContent: SiteContent = {
     primaryBtn: 'PLANEJAR MINHA VIAGEM',
     secondaryBtn: 'FALAR NO WHATSAPP',
     whatsappNumber: '5598999990000',
-    partnerLogos: ['', '', '', ''],
   },
   footer: {
     description: 'Somos apaixonados pelo Maranhão. Nossa missão é conectar viajantes às experiências mais autênticas e transformadoras deste estado único.',
