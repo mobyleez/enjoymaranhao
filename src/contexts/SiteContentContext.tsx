@@ -113,9 +113,11 @@ export const defaultContent: SiteContent = {
   destinations: [
     { name: 'Lençóis Maranhenses', tag: 'Imperdível', sub: 'Dunas brancas e lagoas cristalinas', image: 'https://images.unsplash.com/photo-1626010429613-0d52dcb7a14a?w=800&q=80' },
     { name: 'São Luís', tag: 'Patrimônio UNESCO', sub: 'A ilha capital com azulejos e história', image: 'https://images.unsplash.com/photo-1590486145985-f1e3cb94a4e4?w=600&q=80' },
-    { name: 'Chapada das Mesas', tag: 'Natureza', sub: 'Cachoeiras e formações rochosas deslumbrantes', image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600&q=80' },
-    { name: 'Barreirinhas', tag: 'Ecoturismo', sub: 'Portal dos Lençóis Maranhenses', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80' },
-    { name: 'Delta do Parnaíba', tag: 'Aventura', sub: 'Encontro do rio com o mar', image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80' },
+    { name: 'Alcântara', tag: 'Histórico', sub: 'Ruínas coloniais e vista para o mar', image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600&q=80' },
+    { name: 'Delta do Parnaíba (MA/PI)', tag: 'Aventura', sub: 'Encontro do rio com o mar', image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80' },
+    { name: 'Jericoacoara (CE)', tag: 'Praias', sub: 'Dunas, lagoas e pôr do sol inesquecível', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80' },
+    { name: 'Rota das Emoções (MA/PI/CE)', tag: 'Roteiro', sub: 'A aventura completa pelo nordeste', image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80' },
+    { name: 'Travessia Lençóis Maranhenses', tag: 'Expedição', sub: 'Travessia épica pelas dunas e lagoas', image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80' },
   ],
   experiences: [
     { icon: 'mountain', num: '01', title: 'Trekking nas Dunas', desc: 'Percorra a pé as dunas brancas dos Lençóis Maranhenses ao pôr do sol. Um espetáculo que muda para sempre a sua percepção de beleza natural.' },
