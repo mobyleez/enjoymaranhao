@@ -83,7 +83,6 @@ export interface SiteContent {
     primaryBtn: string;
     secondaryBtn: string;
     whatsappNumber: string;
-    partnerLogos: string[];
   };
   footer: {
     description: string;
