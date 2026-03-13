@@ -46,6 +46,13 @@ export interface GalleryItem {
   image: string;
 }
 
+export interface TestimonialItem {
+  name: string;
+  date: string;
+  text: string;
+  rating: number;
+}
+
 export interface SiteContent {
   logoUrl?: string;
   hero: {
@@ -58,6 +65,12 @@ export interface SiteContent {
   stats: StatItem[];
   destinations: DestinationItem[];
   experiences: ExperienceItem[];
+  testimonials: {
+    heading: string;
+    ratingLabel: string;
+    ratingCount: string;
+    items: TestimonialItem[];
+  };
   manifesto: {
     quote: string;
     authorLine: string;
@@ -70,6 +83,7 @@ export interface SiteContent {
     primaryBtn: string;
     secondaryBtn: string;
     whatsappNumber: string;
+    partnerLogos: string[];
   };
   footer: {
     description: string;
