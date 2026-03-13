@@ -12,9 +12,33 @@ const Footer = () => {
     footer.address,
   ];
 
+  const logoSize = footer.partnerLogoSize || 40;
+
   return (
     <footer className="bg-background border-t border-[rgba(255,255,255,0.06)] px-5 lg:px-16 pt-10 lg:pt-[60px] pb-6 lg:pb-10">
-      <div className="h-[3px] grad-bg w-full mb-10 lg:mb-[60px] opacity-60" />
+      {/* Partner Logos between lines */}
+      {footer.partnerLogos?.some(l => l) && (
+        <div className="mb-10 lg:mb-[60px]">
+          <div className="h-[1px] bg-[rgba(255,255,255,0.08)] w-full mb-6" />
+          <div className="flex items-center gap-8 flex-wrap justify-center">
+            {footer.partnerLogos.filter(l => l).map((logo, i) => (
+              <img
+                key={i}
+                src={logo}
+                alt={`Parceiro ${i + 1}`}
+                style={{ height: `${logoSize}px` }}
+                className="object-contain opacity-50 hover:opacity-100 transition-opacity duration-300"
+              />
+            ))}
+          </div>
+          <div className="h-[3px] grad-bg w-full mt-6 opacity-60" />
+        </div>
+      )}
+
+      {/* Fallback gradient line when no logos */}
+      {!footer.partnerLogos?.some(l => l) && (
+        <div className="h-[3px] grad-bg w-full mb-10 lg:mb-[60px] opacity-60" />
+      )}
 
       <div className="grid grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-8 lg:gap-12 mb-10 lg:mb-[60px]">
         <div className="col-span-2 lg:col-span-1">
