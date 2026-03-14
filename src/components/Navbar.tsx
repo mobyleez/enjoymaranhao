@@ -40,6 +40,13 @@ const Navbar = () => {
         ))}
       </ul>
 
+      <a
+        href="/admin"
+        className="hidden lg:inline-flex text-xs tracking-[2px] uppercase text-[rgba(255,255,255,0.55)] no-underline transition-colors duration-200 font-medium hover:text-white"
+      >
+        Área Admin
+      </a>
+
       <button className="hidden lg:block relative overflow-hidden border border-[rgba(255,255,255,0.2)] text-foreground py-2.5 px-7 rounded-full text-xs tracking-[2px] uppercase font-dm font-medium transition-all duration-300 group bg-transparent">
         <span className="absolute inset-0 grad-bg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <span className="relative z-10">Planejar Viagem</span>
